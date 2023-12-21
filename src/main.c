@@ -5,8 +5,7 @@
 #include <stdio.h>
 
 
-int main(int argc, char ** argv) {
-	int res;
+int main(int argc, char ** argv){
 	Matrix * A = readFromFile(argv[1]);
 	Matrix * b = readFromFile(argv[2]);
 	Matrix * x;
@@ -16,10 +15,8 @@ int main(int argc, char ** argv) {
 	printToScreen(A);
 	printToScreen(b);
 
-	res = eliminate(A,b);
 	x = createMatrix(b->r, 1);
 	if (x != NULL) {
-		res = backsubst(x,A,b);
 
 		printToScreen(x);
 	  freeMatrix(x);
