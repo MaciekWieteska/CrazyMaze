@@ -3,10 +3,8 @@
 
 #include "mat_io.h"
 
-/**
- * Zwraca 0 - elimnacja zakonczona sukcesem
- * Zwraca 1 - macierz osobliwa - dzielenie przez 0
- */
+int findPivotRow(Matrix *mat, int col);
+void swapRows(Matrix *mat, int row1, int row2);
 int eliminate(Matrix *mat, Matrix *b);
 
 #endif
