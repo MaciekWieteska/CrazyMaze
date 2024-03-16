@@ -7,5 +7,6 @@ if(in==NULL){
 	return -13;
 }
 zczyt(in);
+fclose(in);
 	return 0;
 }
