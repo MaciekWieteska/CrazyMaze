@@ -3,7 +3,7 @@
 int main(int argc, char*argv[]){
 	FILE *in = argc > 1 ? fopen(argv[1], "r") : stdin;
 if(in==NULL){
-	printf("Blad, nie moge czytac z: %s", argv[0]);
+	fprintf(stderr,"Blad, nie moge czytac z: %s, %s", argv[0],argv[1]);
 	return -13;
 }
 zczyt(in);
