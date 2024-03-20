@@ -10,7 +10,6 @@ void dzielenie(FILE* in, int wiersze, int kolumny)
     int k = 1;
     int aktw = 1;
     int aktk = 1;
-	int pis_start;
     int maxw = wiersze / ROZMIAR + 1;
     int maxk = kolumny / ROZMIAR + 1;
     char* nazwa = (char*)malloc(sizeof(char) * 50);
