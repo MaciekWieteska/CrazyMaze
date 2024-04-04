@@ -11,14 +11,12 @@ int main(int argc, char*argv[])
 		fprintf(stderr,"Blad, nie moge czytac z: %s, %s", argv[0],argv[1]);
 		return -13;
 	}
-
 	kol = kolumny(in);
 	rewind(in);
 	wier = wiersze(in);
 	rewind(in);
 	dzielenie(in, wier, kol);
 	rewind(in);
-
 	fclose(in);
 	return 0;
 }
