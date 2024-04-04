@@ -53,10 +53,12 @@ int main(int argc, char*argv[])
 	
 	if(fgetc(in) != 'X')
 	{
-		FILE* encr = fopen("maze_encr.txt", "w");
+		rewind(in);
+		FILE* encr = fopen("maze_encr.txt", "w+");
 		odczyt(in, encr);
 		fclose(in);
 		
+		rewind(encr);
 		kol = kolumny(encr);
 		rewind(encr);
 		wier = wiersze(encr);

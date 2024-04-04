@@ -49,6 +49,7 @@ int odczyt(FILE *f, FILE *out) {
     }
 
 
+    free(buffer);
     return 0;
 
 }
