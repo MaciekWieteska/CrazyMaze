@@ -78,7 +78,7 @@ int main(int argc, char*argv[])
 		wier = wiersze(in);
 		rewind(in);
 			
-		dzielenie(in, wier, kol);
+		//dzielenie(in, wier, kol);
 		rewind(in);
 		
 		fclose(in);
