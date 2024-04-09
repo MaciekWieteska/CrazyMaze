@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "zczyt.h"
+#include "funkcje.h"
 #include <unistd.h>  
 
 int kol;
