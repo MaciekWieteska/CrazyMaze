@@ -1,6 +1,7 @@
-a.out: main.o zczyt.o dzielenie.o odczyt.o
+a.out: main.o wymiary.o dzielenie.o decoding.o
 	$(CC) $^
 
-main.o: zczyt.h
-tab.o: zczyt.h
-ruch.o: zczyt.h
+main.o: funkcje.h
+wymiary.o.o: funkcje.h
+dzielenie.o: funkcje.h
+decoding.o: funkcje.h
