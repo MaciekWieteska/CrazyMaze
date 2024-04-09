@@ -54,7 +54,7 @@ int main(int argc, char*argv[])
 	if(fgetc(in) != 'X')
 	{
 		rewind(in);
-		FILE* encr = fopen("maze_encr.txt", "w+");
+		FILE* encr = fopen("maze_decoded.txt", "w+");
 		odczyt(in, encr);
 		fclose(in);
 		
