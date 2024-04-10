@@ -63,9 +63,9 @@ int main(int argc, char*argv[])
 		rewind(encr);
 		wier = wiersze(encr);
 		rewind(encr);
-
+murowanie(in,wier, kol);
 		//dzielenie(encr, wier, kol);
-		rewind(encr);
+		//rewind(encr);
 	
 	
 		fclose(encr);
@@ -76,9 +76,9 @@ int main(int argc, char*argv[])
 		rewind(in);
 		wier = wiersze(in);
 		rewind(in);
-
+murowanie(in,wier, kol);
 		//dzielenie(in, wier, kol);
-		rewind(in);
+		//rewind(in);
 		
 		fclose(in);
 	}
