@@ -1,6 +1,7 @@
-void murowanie(FILE *in, FILE *out,int wiersze,int kolumny) {
-    char labirynt[100][100];
+#include <stdio.h>
 
+void murowanie(FILE *in, FILE *out, int wiersze, int kolumny) {
+    char labirynt[100][100];
     fgetc(in);
 
     for (int i = 0; i < wiersze; i++) {
