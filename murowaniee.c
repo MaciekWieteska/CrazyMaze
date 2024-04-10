@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void murowanie(FILE *in, FILE *out, int wiersze, int kolumny) {
+void murowanie(FILE *in, int wiersze, int kolumny) {
     char labirynt[100][100];
     fgetc(in);
 
@@ -35,7 +35,15 @@ void murowanie(FILE *in, FILE *out, int wiersze, int kolumny) {
         iteracja++;
     } while (zmiany != 0 && iteracja < maksymalnaIteracja);
 
+    FILE *out = fopen("zmodyfikowany_labirynt.txt", "w");
+    if (out == NULL) {
+        fprintf(stderr, "Błąd: Nie mogę utworzyć pliku wyjściowego.\n");
+        return;
+    }
+
     for (int i = 0; i < wiersze; i++) {
         fprintf(out, "%s", labirynt[i]);
     }
+
+    fclose(out);
 }
