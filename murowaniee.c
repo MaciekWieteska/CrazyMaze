@@ -1,4 +1,12 @@
-void murowanie(char labirynt[][100], int wiersze, int kolumny) {
+void murowanie(FILE *in, FILE *out,int wiersze,int kolumny) {
+    char labirynt[100][100];
+
+    fgetc(in);
+
+    for (int i = 0; i < wiersze; i++) {
+        fgets(labirynt[i], sizeof(labirynt[i]), in);
+    }
+
     int zmiany;
     int maksymalnaIteracja = 10000;
     int iteracja = 0;
@@ -25,4 +33,8 @@ void murowanie(char labirynt[][100], int wiersze, int kolumny) {
         }
         iteracja++;
     } while (zmiany != 0 && iteracja < maksymalnaIteracja);
+
+    for (int i = 0; i < wiersze; i++) {
+        fprintf(out, "%s", labirynt[i]);
+    }
 }
