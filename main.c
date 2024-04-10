@@ -63,7 +63,7 @@ int main(int argc, char*argv[])
 		rewind(encr);
 		wier = wiersze(encr);
 		rewind(encr);
-murowanie(in,wier, kol);
+murowanie(encr,wier, kol);
 		//dzielenie(encr, wier, kol);
 		//rewind(encr);
 	
