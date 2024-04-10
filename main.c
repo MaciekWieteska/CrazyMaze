@@ -63,13 +63,6 @@ int main(int argc, char*argv[])
 		rewind(encr);
 		wier = wiersze(encr);
 		rewind(encr);
-		for (int i = 0; i < wiersze; i++) {
-        fgets(labirynt[i], sizeof(labirynt[i]), in);
-    }
-	 murowanie(labirynt,wiersze,kolumny);
-	for (int i = 0; i < wiersze; i++) {
-        fprintf(out, "%s", labirynt[i]);
-    }
 
 		//dzielenie(encr, wier, kol);
 		rewind(encr);
@@ -83,13 +76,7 @@ int main(int argc, char*argv[])
 		rewind(in);
 		wier = wiersze(in);
 		rewind(in);
-		for (int i = 0; i < wiersze; i++) {
-        fgets(labirynt[i], sizeof(labirynt[i]), in);
-    }
-	 murowanie(labirynt,wiersze,kolumny);
-	for (int i = 0; i < wiersze; i++) {
-        fprintf(in, "%s", labirynt[i]);
-    }	
+
 		//dzielenie(in, wier, kol);
 		rewind(in);
 		
