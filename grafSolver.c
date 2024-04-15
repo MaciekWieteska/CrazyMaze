@@ -7,16 +7,16 @@ int grafSolver(FILE *in, FILE *out) {
     int najmniejsza_suma = 400;
     int znaleziono_k = 0;
 
-    char *linia = malloc(sizeof(char) * 500); // Alokacja pamięci dla bufora
+    char *linia = malloc(sizeof(char) * 500); 
 
     while (fgets(linia, 100, in) != NULL) {
         int dlugosc_linii = strlen(linia);
-        if (linia[dlugosc_linii - 1] != '\n') { // Sprawdzanie czy linia została w pełni wczytana
-            int nowy_rozmiar = 2 * dlugosc_linii + 1; // Nowy rozmiar bufora (100*2)
-            linia = realloc(linia, sizeof(char) * nowy_rozmiar); // Realokacja pamięci
+        if (linia[dlugosc_linii - 1] != '\n') { 
+            int nowy_rozmiar = 2 * dlugosc_linii + 1;
+            linia = realloc(linia, sizeof(char) * nowy_rozmiar); 
             if (linia == NULL) {
                 fprintf(stderr, "Błąd alokacji pamięci.\n");
-                return -1; // Zakończenie programu w przypadku błędu alokacji
+                return -1;
             }
         }
 
@@ -34,7 +34,7 @@ int grafSolver(FILE *in, FILE *out) {
         }
     }
 
-    free(linia); // Zwolnienie pamięci zaalokowanej dla bufora
+    free(linia); 
 
     if (znaleziono_k == 0) {
         fprintf(out, "Brak linii zawierających literę 'k'.\n");
