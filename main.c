@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "funkcje.h"
 #include <unistd.h>  
-
+struct s header;
 int kol;
 int wier;
 int opt;
@@ -55,7 +55,7 @@ int main(int argc, char*argv[])
 	{
 		rewind(in);
 		FILE* encr = fopen("maze_decoded.txt", "w+");
-		odczyt(in, encr);
+		odczyt(in, encr,&header);
 		fclose(in);
 		
 		rewind(encr);
