@@ -1,61 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int odczyt(FILE *f, FILE *out) {
-    char* buffer = malloc(40);
+struct s {
+    int File_Id;
+    char ESC;
+    short columns;
+    short lines;
+    short entryx;
+    short entryy;
+    short exitx;
+    short exity;
+    char reserved[12];
+    int counter;
+    int solution_offset;
+    char separator;
+    char wall;
+    char path;
+} __attribute__((packed));
 
-    if (buffer == NULL) {
+struct slowo{
+    char sep;
+    char val;
+    unsigned char amount;
+}__attribute__((packed));
+
+int odczyt(FILE *f, FILE *out, struct s *header) {
+    int currX = 1;
+    int currY = 1;
+
+    if (fread(header, 40, 1, f) != 1) {
         return -1;
     }
 
-    int liczba_slow;
+    struct slowo* slowa = malloc(header->counter * 3);
 
-    if (fread(buffer, 40, 1, f) != 1) {
-        free(buffer);
+    if(slowa == NULL)
+        return -1;
+
+    if (fread(slowa, 3, header->counter, f) != header->counter) {
+        free(slowa);
         return -1;
     }
 
-    char* pointer = buffer;
-    pointer += 29;
-    liczba_slow = *(int*)pointer;
+    for(int i = 0; i < header->counter; i++)
+    {
+        for (int y = 0; y < slowa[i].amount + 1; y++) {
+            if (currX == header->entryx && currY == header->entryy) {
+                fprintf(out, "P");
+            } else if (currX == header->exitx && currY == header->exity) {
+                fprintf(out, "K");
+            } else {
+                fprintf(out, "%c", slowa[i].val);
+            }
 
-    unsigned char wartosc;
-    char slowo;
+            currX++;
 
-    free(buffer);
-    buffer = malloc(liczba_slow * 3);
-
-    if (buffer == NULL) {
-        return -1;
-    }
-
-    if (fread(buffer, liczba_slow * 3, 1, f) != 1) {
-        free(buffer);
-        return -1;
-    }
-
-    pointer = buffer;
-
-
-    int counter = 0;
-
-    for (int i = 0; i < liczba_slow; i++) {
-        pointer++;
-        slowo = *pointer;
-        pointer++;
-        wartosc = *pointer;
-        pointer++;
-
-        for (int y = 0; y < wartosc+1; y++) {
-            fprintf(out, "%c", slowo);
-            counter++;
-            if (counter == 513) {
+            if (currX == header->columns+1) {
                 fprintf(out, "\n");
-                counter = 0;
+                currX = 1;
+                currY++;
             }
         }
     }
 
-    free(buffer);
+    free(slowa);
     return 0;
 }
