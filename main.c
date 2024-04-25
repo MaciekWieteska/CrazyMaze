@@ -9,6 +9,7 @@ int opt;
 FILE *in;
 int main(int argc, char*argv[])
 {
+struct s header;
 	
 	while((opt = getopt(argc, argv, "w:n:hl:")) != -1)
 	{
@@ -22,7 +23,7 @@ int main(int argc, char*argv[])
 			case 'l': // nazwa pliku wejsciowego
 			if(optarg != NULL)
 			{
-				in = fopen(optarg, "r+");
+				in = fopen(optarg, "r");
 				if(in==NULL)
 				{
 					fprintf(stderr,"Blad, nie moge czytac z: %s, %s", argv[0],optarg);
@@ -53,8 +54,8 @@ int main(int argc, char*argv[])
 	if(fgetc(in) != 'X')
 	{
 		rewind(in);
-		FILE* encr = fopen("maze_decoded.txt", "r");
-		odczyt(in, encr);
+		FILE* encr = fopen("maze_decoded.txt", "w");
+		odczyt(in, encr, &header);
 		fclose(in);
 		
 		rewind(encr);
@@ -71,8 +72,8 @@ int main(int argc, char*argv[])
 		// FILE *graf_plik = fopen("graf.txt", "w+");
 		// graf(murowany, graf_plik, wier, kol);
 		//rewind(encr);
-		FILE *graf_plik = fopen("graf.txt", "w+");
-		graf(encr, graf_plik, wier, kol);
+		//FILE *graf_plik = fopen("graf.txt", "w+");
+		//graf(encr, graf_plik, wier, kol);
 	
 		fclose(encr);
 	}
@@ -87,11 +88,11 @@ int main(int argc, char*argv[])
 		// murowanie(in, murowany, wier, kol);
 		// fclose(in);
 		// rewind(murowany);
-		FILE *graf_plik = fopen("graf.txt", "w+");
-		graf(in, graf_plik, wier, kol);
+		//FILE *graf_plik = fopen("graf.txt", "w+");
+		//graf(in, graf_plik, wier, kol);
 		//rewind(in);
 		
-		fclose(graf_plik);
+		//fclose(graf_plik);
 	}
 	return 0;
 }
