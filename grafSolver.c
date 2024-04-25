@@ -44,7 +44,7 @@ int grafSolver(FILE *in, FILE *out) {
     fseek(in, 0, SEEK_SET);
     char sciezka[najmniejsza_suma];
     fgets(sciezka, sizeof(sciezka), in);
-
+fprintf(out, "START\n");
     int dlugosc = strlen(sciezka);
     for (int i = 0; i < dlugosc; i += 2) {
         int liczba = abs(sciezka[i] - '0');
@@ -64,6 +64,6 @@ int grafSolver(FILE *in, FILE *out) {
                 break;
         }
     }
-
+fprintf(out,"STOP\n"); 
     return najmniejsza_suma;
 }
