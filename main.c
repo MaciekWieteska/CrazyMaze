@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "funkcje.h"
 #include <unistd.h>  
-
+#include <string.h>
 int kol;
 int wier;
 int opt;
