@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 int grafSolver(FILE *in, FILE *out) {
+	fprintf(out, "START\n"); 
     char sciezka[30000]; 
     fgets(sciezka, sizeof(sciezka), in);
 
