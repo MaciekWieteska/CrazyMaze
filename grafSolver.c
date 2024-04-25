@@ -50,13 +50,13 @@ int grafSolver(FILE *in, FILE *out) {
         int liczba = abs(sciezka[i] - '0');
         char kierunek = sciezka[i + 1];
         switch (kierunek) {
-            case 'G':
+            case 'U':
                 fprintf(out, "FORWARD %d\n", liczba);
                 break;
             case 'L':
                 fprintf(out, "LEFT %d\n", liczba);
                 break;
-            case 'P':
+            case 'R':
                 fprintf(out, "RIGHT %d\n", liczba);
                 break;
             case 'D':
