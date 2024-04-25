@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funkcje.h"
-#include <unistd.h>
+#include <unistd.h>  
 #include <string.h>
 int kol;
 int wier;
@@ -10,52 +10,42 @@ FILE *in;
 
 int main(int argc, char* argv[]) {
     struct s header;
-    char *filename = NULL; // Zmienna do przechowywania nazwy pliku
+	char* filename;
 
-    // Analiza argumentów linii poleceń
     while ((opt = getopt(argc, argv, "w:n:hl:")) != -1) {
         switch (opt) {
-            case 'h': // Pomoc
-                printf("Witaj w programie rozwiązującym labirynt.\n");
-                printf("Działa on według poniższego wzoru wywołania:\n");
-                printf("a.out -l 'nazwa pliku z labiryntem' -w / a.out -l 'nazwa pliku z labiryntem' -n gdzie:\n");
-                printf("-w znajduje wszystkie rozwiązania labiryntu\n");
-                printf("-n znajduje najkrótsze rozwiązanie labiryntu.\n");
-                printf("-l zawiera nazwe pliku z labiryntem\n");
+            case 'h': //Pomoc
+                printf("Witaj w programie rozwiązującym labirynt./nDziała on według poniższego wzoru wywołania:\n");
+                printf("a.out -l 'nazwa pliku z labiryntem' -w / a.out -l 'nazwa pliku z labiryntem' -n gdzie:\n-w znajduje wszystkie rozwiązania labiryntu\n-n znajduje najkrótsze rozwiązanie labiryntu.\n-l zawiera nazwe pliku z labiryntem\n");
                 return 0;
-
-            case 'l': // Nazwa pliku wejściowego
-                if (optarg != NULL) {
-                    filename = optarg; 
-                    if (argc > optind && strstr(argv[optind], ".txt") != NULL) {
                 
-                        in = fopen(argv[optind], "r");
-                    } else {
-                       
-                        in = fopen(argv[optind], "rb");
-                    }
-                    if (in == NULL) {
-                        fprintf(stderr, "Błąd, nie mogę czytać z: %s, %s", argv[0], optarg);
-                        return -13;
-                    }
+            case 'l': // nazwa pliku wejsciowego
+                if (optarg != NULL) {
+                    filename = optarg; // Przypisz nazwę pliku z argumentu
+                    break;
                 } else {
                     printf("Nie podano argumentu wywołania\n");
                     return 1;
                 }
-                break;
-
-            case 'w': // Wszystkie trasy
-                // Trochę kodu
+                
+            case 'w': // wszystkie trasy
+                //
+                //Troche kodu
+                //
                 return 0;
-
-            case 'n': // Najkrótsza trasa
-                // Kod
+                
+            case 'n': // najkrótsza trasa 
+                //
+                //kod
+                //
                 return 0;
         }
     }
+
 	
 	if(fgetc(in) != 'X')
 	{
+		in = fopen(filename, "rb");
 		rewind(in);
 		FILE* encr = fopen("maze_decoded.txt", "w");
 		odczyt(in, encr, &header);
@@ -82,6 +72,7 @@ int main(int argc, char* argv[]) {
 	}
 	else
 	{
+		in = fopen(filename, "r");
 		kol = kolumny(in);
 		rewind(in);
 		wier = wiersze(in);
