@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "funkcje.h"
 
 struct s {
     int File_Id;

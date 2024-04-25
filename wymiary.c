@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "funkcje.h"
 
 int kolumny(FILE *in){
 int c;
@@ -6,7 +7,7 @@ int z = 0;
 int wiersze = 0;
 int kolumny = 0;
 int pocz = 0;
-printf("Jezeli to widzisz to znaczy ze wszystko dziala");
+//printf("Jezeli to widzisz to znaczy ze wszystko dziala");
 while((c=fgetc(in))!=EOF){
 z++;
 if(c == '\n'){
@@ -35,7 +36,7 @@ int z = 0;
 int wiersze = 0;
 int kolumny = 0;
 int pocz = 0;
-printf("Jezeli to widzisz to znaczy ze wszystko dziala");
+//printf("Jezeli to widzisz to znaczy ze wszystko dziala");
 while((c=fgetc(in))!=EOF){
 z++;
 if(c == '\n'){

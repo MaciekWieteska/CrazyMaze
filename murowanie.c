@@ -1,49 +1,74 @@
 #include <stdio.h>
+#include "funkcje.h"
 
-void murowanie(FILE *in, int wiersze, int kolumny) {
-    char labirynt[513][513];
-    fgetc(in);
 
-    for (int i = 0; i < wiersze; i++) {
-        fgets(labirynt[i], sizeof(labirynt[i]), in);
-    }
 
-    int zmiany;
-    int maksymalnaIteracja = 10000;
-    int iteracja = 0;
 
-    do {
-        zmiany = 0;
-        for (int i = 0; i < wiersze; i++) {
-            for (int j = 0; j < kolumny; j++) {
-                if (labirynt[i][j] == 'P' || labirynt[i][j] == 'K') {
-                    continue;
-                }
 
-                int sasiedzi = 0;
-                if (i > 0 && labirynt[i - 1][j] == 'X') sasiedzi++;
-                if (i < wiersze - 1 && labirynt[i + 1][j] == 'X') sasiedzi++;
-                if (j > 0 && labirynt[i][j - 1] == 'X') sasiedzi++;
-                if (j < kolumny - 1 && labirynt[i][j + 1] == 'X') sasiedzi++;
-
-                if (sasiedzi == 3) {
-                    labirynt[i][j] = 'X';
-                    zmiany++;
-                }
-            }
-        }
-        iteracja++;
-    } while (zmiany != 0 && iteracja < maksymalnaIteracja);
-
-    FILE *out = fopen("zmodyfikowany_labirynt.txt", "w");
-    if (out == NULL) {
-        fprintf(stderr, "Błąd: Nie mogę utworzyć pliku wyjściowego.\n");
-        return;
-    }
-
-    for (int i = 0; i < wiersze; i++) {
-        fprintf(out, "%s", labirynt[i]);
-    }
-
-    fclose(out);
+int murowanie(FILE *in,FILE* out, int wiersze, int kolumny)
+{
+	int a; 
+	int b; 
+	int pozycja = 0;
+	int sasiedzi = 0;
+	int kol = kolumny + 1 ;
+	int i = 0; 
+	
+	while((a = fgetc(in)) != EOF) // przepisuje labirynt
+	{
+		fputc(a, out);
+	}
+	
+	rewind(out);
+	
+	
+	// murowanie labiryntu
+	while((b = fgetc(out)) != EOF)//dopóki nie dojdzie do końca pliku czyta kolejne znaki 
+	{
+		if( b == ' ')
+		{
+			fseek(out, pozycja - kol, SEEK_SET); // góra
+			if((b = fgetc(out)) == 'X')
+			{
+				sasiedzi++;
+			}
+			fseek(out, pozycja + kol, SEEK_SET); // dół
+			if((b = fgetc(out)) == 'X')
+			{
+				sasiedzi++;
+			}
+			fseek(out, pozycja + 1, SEEK_SET); // prawo
+			if((b = fgetc(out)) == 'X')
+			{
+				sasiedzi++;
+			}
+			fseek(out, pozycja - 1 , SEEK_SET); // lewo
+			if((b = fgetc(out)) == 'X')
+			{
+				sasiedzi++;
+			}	
+		}
+		//printf("sasiedzi: %d\n", sasiedzi);
+		if(sasiedzi == 3) // slepy zaułek 
+		{
+			
+			//printf("%c ", b);
+			fseek(out, pozycja, SEEK_SET);
+			fputc('X', out);
+			// wstawia znak w poszukiwane miejsce
+			rewind(out); // powrot na start 
+			//printf("od początku");
+			pozycja = 0; 
+			// i++;
+			// printf("%d ", i);
+		}
+		else // idzie dalej do przodu 
+		{
+			pozycja ++;
+			fseek(out, pozycja, SEEK_SET);
+		}
+	
+		sasiedzi = 0;
+	}
+	return 0;
 }

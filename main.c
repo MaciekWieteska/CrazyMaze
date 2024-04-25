@@ -2,12 +2,11 @@
 #include <stdlib.h>
 #include "funkcje.h"
 #include <unistd.h>  
-struct s header;
+
 int kol;
 int wier;
 int opt;
 FILE *in;
-char labirynt[513][513];
 int main(int argc, char*argv[])
 {
 	
@@ -23,7 +22,7 @@ int main(int argc, char*argv[])
 			case 'l': // nazwa pliku wejsciowego
 			if(optarg != NULL)
 			{
-				in = fopen(optarg, "r");
+				in = fopen(optarg, "r+");
 				if(in==NULL)
 				{
 					fprintf(stderr,"Blad, nie moge czytac z: %s, %s", argv[0],optarg);
@@ -54,8 +53,8 @@ int main(int argc, char*argv[])
 	if(fgetc(in) != 'X')
 	{
 		rewind(in);
-		FILE* encr = fopen("maze_decoded.txt", "w+");
-		odczyt(in, encr,&header);
+		FILE* encr = fopen("maze_decoded.txt", "r");
+		odczyt(in, encr);
 		fclose(in);
 		
 		rewind(encr);
@@ -63,10 +62,17 @@ int main(int argc, char*argv[])
 		rewind(encr);
 		wier = wiersze(encr);
 		rewind(encr);
-murowanie(encr,wier, kol);
-		//dzielenie(encr, wier, kol);
+		
+		// FILE* murowany = fopen("zamurowany_labirynt.txt", "w+");
+		// murowanie(encr, murowany, wier, kol);
+		// fclose(encr);
+		
+		// rewind(murowany);
+		// FILE *graf_plik = fopen("graf.txt", "w+");
+		// graf(murowany, graf_plik, wier, kol);
 		//rewind(encr);
-	
+		FILE *graf_plik = fopen("graf.txt", "w+");
+		graf(encr, graf_plik, wier, kol);
 	
 		fclose(encr);
 	}
@@ -76,11 +82,16 @@ murowanie(encr,wier, kol);
 		rewind(in);
 		wier = wiersze(in);
 		rewind(in);
-murowanie(in,wier, kol);
-		//dzielenie(in, wier, kol);
+		
+		// FILE* murowany = fopen("zamurowany_labirynt.txt", "w+");
+		// murowanie(in, murowany, wier, kol);
+		// fclose(in);
+		// rewind(murowany);
+		FILE *graf_plik = fopen("graf.txt", "w+");
+		graf(in, graf_plik, wier, kol);
 		//rewind(in);
 		
-		fclose(in);
+		fclose(graf_plik);
 	}
 	return 0;
 }
