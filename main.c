@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funkcje.h"
-#include <unistd.h>  
-#include <string.h>
+#include <unistd.h>
+
 int kol;
 int wier;
 int opt;
@@ -10,50 +10,48 @@ FILE *in;
 
 int main(int argc, char* argv[]) {
     struct s header;
-    char *filename; // Zmienna do przechowywania nazwy pliku
+    char *filename = NULL; // Zmienna do przechowywania nazwy pliku
 
+    // Analiza argumentów linii poleceń
     while ((opt = getopt(argc, argv, "w:n:hl:")) != -1) {
         switch (opt) {
-            case 'h': //Pomoc
-                printf("Witaj w programie rozwiązującym labirynt./nDziała on według poniższego wzoru wywołania:\n");
-                printf("a.out -l 'nazwa pliku z labiryntem' -w / a.out -l 'nazwa pliku z labiryntem' -n gdzie:\n-w znajduje wszystkie rozwiązania labiryntu\n-n znajduje najkrótsze rozwiązanie labiryntu.\n-l zawiera nazwe pliku z labiryntem\n");
+            case 'h': // Pomoc
+                printf("Witaj w programie rozwiązującym labirynt.\n");
+                printf("Działa on według poniższego wzoru wywołania:\n");
+                printf("a.out -l 'nazwa pliku z labiryntem' -w / a.out -l 'nazwa pliku z labiryntem' -n gdzie:\n");
+                printf("-w znajduje wszystkie rozwiązania labiryntu\n");
+                printf("-n znajduje najkrótsze rozwiązanie labiryntu.\n");
+                printf("-l zawiera nazwe pliku z labiryntem\n");
                 return 0;
-                
-            case 'l': // nazwa pliku wejsciowego
+
+            case 'l': // Nazwa pliku wejściowego
                 if (optarg != NULL) {
-                    filename = optarg; // Przypisz nazwę pliku z argumentu
-                    break;
+                    filename = optarg; 
+                    if (argc > optind && strstr(argv[optind], ".txt") != NULL) {
+                
+                        in = fopen(argv[optind], "r");
+                    } else {
+                       
+                        in = fopen(argv[optind], "rb");
+                    }
+                    if (in == NULL) {
+                        fprintf(stderr, "Błąd, nie mogę czytać z: %s, %s", argv[0], optarg);
+                        return -13;
+                    }
                 } else {
                     printf("Nie podano argumentu wywołania\n");
                     return 1;
                 }
-                
-            case 'w': // wszystkie trasy
-                //
-                //Troche kodu
-                //
+                break;
+
+            case 'w': // Wszystkie trasy
+                // Trochę kodu
                 return 0;
-                
-            case 'n': // najkrótsza trasa 
-                //
-                //kod
-                //
+
+            case 'n': // Najkrótsza trasa
+                // Kod
                 return 0;
         }
-    }
-
-    // Sprawdź, czy pierwszy argument jest plikiem tekstowym
-    if (argc > 1 && strstr(argv[1], ".txt") != NULL) {
-        // Jeśli tak, otwórz plik w trybie tekstowym "r"
-        in = fopen(argv[1], "r");
-    } else {
-        // W przeciwnym razie otwórz plik w trybie binarnym "rb"
-        in = fopen(argv[1], "rb");
-    }
-
-    if (in == NULL) {
-        fprintf(stderr, "Blad, nie moge czytac z: %s\n", argv[1]);
-        return -13;
     }
 	
 	if(fgetc(in) != 'X')
