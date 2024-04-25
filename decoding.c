@@ -2,28 +2,6 @@
 #include <stdlib.h>
 #include "funkcje.h"
 
-struct s {
-    int File_Id;
-    char ESC;
-    short columns;
-    short lines;
-    short entryx;
-    short entryy;
-    short exitx;
-    short exity;
-    char reserved[12];
-    int counter;
-    int solution_offset;
-    char separator;
-    char wall;
-    char path;
-} __attribute__((packed));
-
-struct slowo{
-    char sep;
-    char val;
-    unsigned char amount;
-}__attribute__((packed));
 
 int odczyt(FILE *f, FILE *out, struct s *header) {
     int currX = 1;
