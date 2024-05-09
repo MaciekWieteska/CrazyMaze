@@ -130,9 +130,7 @@ int main(int argc, char* argv[]) {
 		wier = wiersze(encr);
 		rewind(encr);
 		
-		// FILE* murowany = fopen("zamurowany_labirynt.txt", "w+");
-		// murowanie(encr, murowany, wier, kol);
-		// fclose(encr);
+
 		FILE* graf_plik = fopen("graf.txt", "w+");
 		FILE* wynik_t = fopen("wynik_temp.txt", "w+");
 		graf2(encr, graf_plik, wier, kol, wynik_t);
@@ -155,10 +153,6 @@ int main(int argc, char* argv[]) {
 		wier = wiersze(in);
 		rewind(in);
 		
-		// FILE* murowany = fopen("zamurowany_labirynt.txt", "w+");
-		// murowanie(in, murowany, wier, kol);
-		// fclose(in);
-		// rewind(murowany);
 		FILE* graf_plik = fopen("graf.txt", "w+");
 		FILE* wynik_t = fopen("wynik_temp.txt", "w+");
 		graf2(in, graf_plik, wier, kol, wynik_t);
