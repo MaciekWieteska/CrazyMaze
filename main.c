@@ -97,12 +97,12 @@ int main(int argc, char* argv[]) {
 	}
     while ((opt = getopt(argc, argv, "hl:")) != -1) {
         switch (opt) {
-            case 'h': //Pomoc
+            case 'h': 
                 printf("Witaj w programie rozwiązującym labirynt./nDziała on według poniższego wzoru wywołania:\n");
                 printf("a.out -l 'nazwa pliku z labiryntem'\n");
                 return 0;
                 
-            case 'l': // nazwa pliku wejsciowego
+            case 'l':
                 if (optarg != NULL) {
                     filename = optarg; // Przypisz nazwę pliku z argumentu
                     break;
@@ -110,16 +110,14 @@ int main(int argc, char* argv[]) {
                     printf("Nie podano argumentu wywołania\n");
                     return 1;
                 }
-			case '?': // nieznana sytuacja
+			case '?': 
 				printf("Podano niewłaściwe dane wejściowe. Aby poznać działanie programu wywołaj go z argumentem -h\n");
                 return 0;
         }
     }
 
 	
-	  // Sprawdź, czy pierwszy argument jest plikiem tekstowym
     if (strstr(filename, ".bin") != NULL) {
-        // Jeśli tak, otwórz plik w trybie tekstowym "r"
         in = fopen(filename, "rb");
 		FILE* encr = fopen("maze_decoded.txt", "w+");
 		odczyt(in, encr, &header);
@@ -146,7 +144,6 @@ int main(int argc, char* argv[]) {
 		remove("wynik_temp.txt");
     } 
 	else {
-        // W przeciwnym razie otwórz plik w trybie binarnym "rb"
         in = fopen(filename, "r");
 		kol = kolumny(in);
 		rewind(in);
