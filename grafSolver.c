@@ -39,6 +39,5 @@ int grafSolver(FILE *in, FILE *out) {
     }
 
     fprintf(out, "STOP\n"); 
-	free(sciezka);	
     return 0;
 }
