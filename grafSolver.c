@@ -5,7 +5,7 @@
 
 int grafSolver(FILE *in, FILE *out) {
 	fprintf(out, "START\n"); 
-    char sciezka[30000]; 
+    char sciezka[400000]; 
     fgets(sciezka, sizeof(sciezka), in);
 
     int dlugosc = strlen(sciezka);
@@ -39,5 +39,6 @@ int grafSolver(FILE *in, FILE *out) {
     }
 
     fprintf(out, "STOP\n"); 
+	free(sciezka);	
     return 0;
 }
