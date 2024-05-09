@@ -248,8 +248,6 @@ int graf2(FILE* in, FILE* out, int wiersze, int kolumny, FILE* wynik){ // głów
 		}
 	}
 	
-	// robi moonwalk jak Majkel Dżekson   
-	
-	
+	free(kolejka); 
 	return 0;
 }
